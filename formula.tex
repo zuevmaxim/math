@@ -1,0 +1,427 @@
+\documentclass[12pt]{article}
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{amsthm,amsmath,amssymb}
+\usepackage[russian,colorlinks=true,urlcolor=red,linkcolor=blue]{hyperref}
+\usepackage{enumerate}
+\usepackage{datetime}
+\usepackage{minted}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{tikz}
+\usepackage{epstopdf}
+
+\def\NAME{Динамика}
+\def\DATE{15 ноября}
+\def\CURNO{\NO\t{9}}
+
+\parskip=0em
+\parindent=0em
+
+\sloppy
+\voffset=-20mm
+\textheight=235mm
+\hoffset=-25mm
+\textwidth=180mm
+\headsep=12pt
+\footskip=20pt
+
+\setcounter{page}{0}
+\pagestyle{empty}
+
+% Основные математические символы
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\heart}{\mathalpha}{extraup}{86}
+\newcommand{\N}{\mathbb{N}}   % Natural numbers
+\newcommand{\R}{\mathbb{R}}   % Ratio numbers
+\newcommand{\Z}{\mathbb{Z}}   % Integer numbers
+\def\EPS{\varepsilon}         %
+\def\SO{\Rightarrow}          % =>
+\def\EQ{\Leftrightarrow}      % <=>
+\def\t{\texttt}               % mono font
+\def\c#1{{\rm\sc{#1}}}        % font for classes NP, SAT, etc
+\def\O{\mathcal{O}}           %
+\def\NO{\t{\#}}               % #
+\renewcommand{\le}{\leqslant} % <=, beauty
+\renewcommand{\ge}{\geqslant} % >=, beauty
+\def\XOR{\text{ {\raisebox{-2pt}{\ensuremath{\Hat{}}}} }}
+\newcommand{\q}[1]{\langle #1 \rangle}               % <x>
+\newcommand\URL[1]{{\footnotesize{\url{#1}}}}        %
+\newcommand{\sfrac}[2]{{\scriptstyle\frac{#1}{#2}}}  % Очень маленькая дробь
+\newcommand{\mfrac}[2]{{\textstyle\frac{#1}{#2}}}    % Небольшая дробь
+\newcommand{\score}[1]{{\bf\color{red}{(#1)}}}
+
+% Отступы
+\def\makeparindent{\hspace*{\parindent}}
+\def\up{\vspace*{-0.3em}}
+\def\down{\vspace*{0.3em}}
+\def\LINE{\vspace*{-1em}\noindent \underline{\hbox to 1\textwidth{{ } \hfil{ } \hfil{ } }}}
+%\def\up{\vspace*{-\baselineskip}}
+
+\lhead{Математический анализ}
+\chead{}
+\rhead{}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\lfoot{}
+\cfoot{\thepage\t{/}\pageref*{LastPage}}
+\rfoot{}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\newenvironment{MyList}[1][4pt]{
+  \begin{enumerate}[1.]
+  \setlength{\parskip}{0pt}
+  \setlength{\itemsep}{#1}
+}{       
+  \end{enumerate}
+}
+\newenvironment{InnerMyList}[1][0pt]{
+  \vspace*{-0.5em}
+  \begin{enumerate}[a)]
+  \setlength{\parskip}{#1}
+  \setlength{\itemsep}{0pt}
+}{
+  \end{enumerate}
+}
+
+\newcommand{\Section}[1]{
+  \refstepcounter{section}
+  \addcontentsline{toc}{section}{\arabic{section}. #1} 
+  %{\LARGE \bf \arabic{section}. #1} 
+  {\LARGE \bf #1} 
+  \vspace*{1em}
+  \makeparindent\unskip
+}
+\newcommand{\Subsection}[1]{
+  \refstepcounter{subsection}
+  \addcontentsline{toc}{subsection}{\arabic{section}.\arabic{subsection}. #1} 
+  {\Large \bf \arabic{section}.\arabic{subsection}. #1} 
+  \vspace*{0.5em}
+  \makeparindent\unskip
+}
+% Код с правильными отступами
+\newenvironment{code}{
+  \VerbatimEnvironment
+
+  \vspace*{-0.5em}
+  \begin{minted}{c}}{
+  \end{minted}
+  \vspace*{-0.5em}
+
+}
+
+% Формулы с правильными отступами
+\newenvironment{smallformula}{
+ 
+  \vspace*{-0.8em}
+}{
+  \vspace*{-1.2em}
+  
+}
+\newenvironment{formula}{
+ 
+  \vspace*{-0.0em}
+}{
+  \vspace*{-0.0em}
+  
+}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{brown}{rgb}{0.5,0.5,0}
+\newcommand{\red}[1]{{\color{red}{#1}}}
+\newcommand{\dkgreen}[1]{{\color{dkgreen}{#1}}}
+
+\begin{document}
+\newcommand\tab[1][0.5cm]{\hspace*{#1}}
+\renewcommand{\dateseparator}{--}
+
+\begin{center}
+  {\Large\bf 
+   Тригонометрия}\\
+\end{center}
+
+\vspace{-1em}
+\LINE
+\vspace{1em}
+\pagestyle{fancy}
+\begin{formula}
+$
+\sin^2 x + \cos^2 x = 1 \hspace{5ex}
+\tg x \cdot \ctg x = 1 \hspace{5ex}
+1 + \tg^2 x = \dfrac{1}{\cos^2 x}\hspace{5ex}
+1 + \ctg^2 x = \dfrac{1}{\sin^2 x}\\
+\\
+\sin 2x = 2 \sin x \cos x \hspace{5ex} 
+\cos 2x = \cos^2 x - \sin^2 x \hspace{5ex} 
+\tg 2x = \dfrac{2\tg x}{1 - \tg^2 x} \hspace{5ex} 
+\ctg 2x = \dfrac{\ctg^2 x - 1}{2 \ctg x}\\
+\\
+\sin 3x = 3\sin x - 4\sin^3 x \hspace{5ex} \cos 3x = 4\cos^3 x - 3\cos x\\
+\\
+\tg 3x = \dfrac{3\tg x - \tg^3 x}{1 - 3 \tg^2 x} \hspace{5ex} 
+\ctg 3x = \dfrac{3\ctg x - \ctg^3 x}{1 - 3 \ctg^2 x}\\
+\\
+\sin(x + y) = \sin x \cos y + \cos x \sin y \hspace{5ex} 
+\sin(x - y) = \sin x \cos y - \cos x \sin y \\
+\\
+\cos(x + y) = \cos x \cos y - \sin x \sin y \hspace{5ex} 
+\cos(x - y) = \cos x \cos y + \sin x \sin y \\
+\\
+\tg(x + y) = \dfrac{\tg x + \tg y}{1 - \tg x \tg y} \hspace{5ex} 
+\tg(x - y) = \dfrac{\tg x - \tg y}{1 + \tg x \tg y} \\
+\\
+\ctg(x + y) = \dfrac{\ctg x \ctg y - 1}{\ctg x + \ctg y} \hspace{5ex} 
+\ctg(x - y) = \dfrac{\ctg x \ctg y + 1}{\ctg x - \ctg y} \\
+\\
+\sin x + \sin y = 2 \sin \dfrac{x + y}{2} \cos \dfrac{x - y}{2} \hspace{5ex} 
+\sin x - \sin y = 2 \sin \dfrac{x - y}{2} \cos \dfrac{x + y}{2} \\
+\\ 
+\cos x + \cos y = 2 \cos \dfrac{x + y}{2} \cos \dfrac{x - y}{2} \hspace{5ex} 
+\cos x + \cos y = -2 \sin \dfrac{x + y}{2} \sin \dfrac{x - y}{2} \\
+\\
+\sin x \sin y = \dfrac{1}{2}[\cos(x - y) - \cos(x + y)]\\
+\\
+\sin x \cos y = \dfrac{1}{2}[\sin(x + y) + \sin(x - y)]\\
+\\
+\cos x \cos y = \dfrac{1}{2}[\cos(x + y) + \cos(x - y)]\\
+\\
+\sin^2 x = \dfrac{1 - \cos 2x}{2} \hspace{5ex}
+\cos^2 x = \dfrac{1 + \cos 2x}{2}\\
+\\
+\sin x = \dfrac{2\tg \frac{x}{2}}{1 + \tg^2 \frac{x}{2}} \hspace{5ex}
+\cos x = \dfrac{1 - \tg^2 \frac{x}{2}}{1 + \tg^2 \frac{x}{2}} \hspace{5ex}
+\tg x = \dfrac{2\tg \frac{x}{2}}{1 - \tg^2 \frac{x}{2}} \hspace{5ex}
+\tg x = \dfrac{1 - \tg^2 \frac{x}{2}}{2\tg \frac{x}{2}} \\
+\\
+$
+\end{formula}
+
+\newpage
+
+\begin{center}
+  {\Large\bf 
+   Геометрия}\\
+\end{center}
+
+\vspace{-1em}
+\LINE
+\vspace{1em}
+\pagestyle{fancy}
+\begin{formula}
+$
+S = \sqrt{p(p - a)(p - b)(p - c)}, p = \dfrac{a + b + c}{2}\\
+\\
+S = \dfrac{1}{3}\sqrt{M(M - m_a)(M - m_b)(M - m_c)}, M = \dfrac{m_a + m_b + m_c}{2}\\
+\\
+S = \dfrac{1}{\sqrt{H(H - \dfrac{2}{h_a})(H - \dfrac{2}{h_b})(H - \dfrac{2}{h_c})}}, H = \dfrac{1}{h_a} + \dfrac{1}{h_b} + \dfrac{1}{h_c}\\
+\\
+\lambda = \dfrac{m}{n}(\dfrac{p}{q} + 1)\\
+\\
+S = \dfrac{abc}{4R} = \dfrac{a^2 \sin B \sin C}{\sin A} = 2R^2\sin A \sin B \sin C\\
+\\
+m_a = \dfrac{1}{2}\sqrt{2c^2 + 2b^2 - a^2}\\
+\\
+l_a = \dfrac{bc\sin A}{(b + c) \sin \dfrac{A}{2}} = \sqrt{bc - a_b a_c}\\
+\\
+r = \dfrac{S}{p - d} $(вневписанная)$\\
+\\
+a^2 = b^2 + c^2 - 2bc \cos A\\
+\\
+\dfrac{a}{\sin A} = \dfrac{b}{\sin B} = \dfrac{c}{\sin C} = 2R\\
+\\
+\cos \alpha = \dfrac{x_1 x_2 + y_1 y_2}{\sqrt{x_1^2 + y_1^2}\sqrt{x_2^2 + y_2^2}}\\
+\\ 
+$
+\end{formula}
+
+\newpage
+
+\begin{center}
+  {\Large\bf 
+   Неравенства}\\
+\end{center}
+
+\vspace{-1em}
+\LINE
+\vspace{1em}
+\pagestyle{fancy}
+\begin{formula}
+Неравенсво Коши: $x_1, x_2, \dots x_n \in \R^+$\\
+
+$\dfrac{n}{\dfrac{1}{x_1} + \dfrac{1}{x_2} + \dots + \dfrac{1}{x_n}} \le (x_1 \cdot x_2 \cdot \hdots \cdot x_n )^{1/n} \le \dfrac{x_1 + x_2 + \dots + x_n}{n} \le \sqrt{\dfrac{x_1^2 + x_2^2 + \dots + x_n^2}{n}}$\\
+
+Неравенство Бернулли: $x > -1, n \in \N$; $(1 + x)^n \ge 1 + nx$
+
+\end{formula}
+
+\begin{center}
+  {\Large\bf 
+   Замечательные пределы}\\
+\end{center}
+
+\vspace{-1em}
+\LINE
+\vspace{1em}
+\pagestyle{fancy}
+\begin{formula}
+	$
+	\lim \limits_{x \rightarrow 0} \dfrac{\sin x}{x} = 1 \hspace{10ex} 
+	\lim \limits_{x \rightarrow 0} \dfrac{\tg x}{x} = 1 \hspace{10ex} 
+	\lim \limits_{x \rightarrow 0} \dfrac{\sh x}{x} = 1 \hspace{10ex} 
+	\lim \limits_{x \rightarrow 0} \dfrac{\th x}{x} = 1 \\
+	\\
+	\lim \limits_{x \rightarrow 0} \dfrac{1 - \cos x}{x^2} = \dfrac{1}{2} \\
+	\\
+	\lim \limits_{x \rightarrow 0} \dfrac{\arcsin x}{x} = 1 \hspace{7ex} 
+	\lim \limits_{x \rightarrow 0} \dfrac{\arctg x}{x} = 1 \\
+	\\
+	\lim \limits_{x \rightarrow 0} (1 + x)^{1/x} = e \hspace{5ex} 
+	\lim \limits_{x \rightarrow +\infty} (1 + \frac{1}{x})^{x} = e \\
+	\\
+	\lim \limits_{x \rightarrow 0} \dfrac{\ln x}{x} = 1 \hspace{11ex} 
+	\lim \limits_{x \rightarrow 0} \dfrac{a^x - 1}{x} = \ln a \\
+	\\
+	\lim \limits_{x \rightarrow 0} \dfrac{(1 + x)^p - 1}{x} = p
+	$
+\end{formula}
+
+\begin{center}
+  {\Large\bf 
+   Гиперболические функции}\\
+\end{center}
+
+\vspace{-1em}
+\LINE
+\vspace{1em}
+\pagestyle{fancy}
+\begin{formula}
+$\sh x = \dfrac{e^x - e^{-x}}{2} \hspace{10ex} \ch x = \dfrac{e^x + e^{-x}}{2} \hspace{10ex}$ 
+$\ch ^2 x - sh^2 x = 1$\\
+\end{formula}
+\newpage
+\begin{center}
+  {\Large\bf 
+   Ряды Тейлора}\\
+\end{center}
+
+\vspace{-1em}
+\LINE
+\vspace{1em}
+\pagestyle{fancy}
+\begin{formula}
+$e^x = 1 + x + \dfrac{x^2}{2!} + \dfrac{x^3}{3!} + \dfrac{x^4}{4!} + ... + \dfrac{x^n}{n!} + o(x^n)$\\
+\\
+$\sh x = x + \dfrac{x^3}{3!} + \dfrac{x^5}{5!} + \dfrac{x^7}{7!} + ... + \dfrac{x^{2n + 1}}{(2n + 1)!} + o(x^{2n + 1})$\\
+\\
+$\ch x = 1 + \dfrac{x^2}{2!} + \dfrac{x^4}{4!} + \dfrac{x^6}{6!} + ... + \dfrac{x^{2n}}{(2n)!} + o(x^{2n})$\\
+\\
+$\sin x = x - \dfrac{x^3}{3!} + \dfrac{x^5}{5!} - \dfrac{x^7}{7!} + ... + (-1)^n\dfrac{x^{2n + 1}}{(2n + 1)!} + o(x^{2n + 1})$\\
+\\
+$\cos x = 1 - \dfrac{x^2}{2!} + \dfrac{x^4}{4!} - \dfrac{x^6}{6!} + ... + (-1)^n\dfrac{x^{2n}}{(2n)!} + o(x^{2n})$\\
+\\
+$\tg x = x + \dfrac{1}{3}x^3 + \dfrac{2}{15}x^5 + o(x^5)$\\
+\\
+$\ln(1 + x) = x - \dfrac{x^2}{2} + \dfrac{x^3}{3} - \dfrac{x^4}{4} + \dots + (-1)^{n + 1}\dfrac{x^n}{n} + o(x^n)$\\
+\\
+$(1 + x)^p = 1 + px + \dfrac{p(p - 1)}{2!}x^2 + \dfrac{p(p - 1)(p - 2)}{3!}x^3 + \dots + \dfrac{p(p - 1)\dots(p - n + 1)}{n!}x^n + o(x^n)$\\
+\\
+$\arctg x = x - \dfrac{x^3}{3} + \dfrac{x^5}{5} - \dfrac{x^7}{7} + ... + (-1)^n\dfrac{x^{2n + 1}}{2n + 1} + o(x^{2n + 1})$\\
+\\
+$\arcsin x = x + \dfrac{x^3}{6} + \dfrac{3x^5}{40} + \dfrac{5x^7}{112} + o(x^{7})$\\
+\\
+
+\end{formula}
+
+\begin{center}
+  {\Large\bf 
+   Производные}\\
+\end{center}
+
+\vspace{-1em}
+\LINE
+\vspace{1em}
+\pagestyle{fancy}
+\begin{formula}
+$
+	(x^n)' = nx^{n - 1} \hspace{5ex} 
+	(\sin x)' = \cos x \hspace{5ex} 
+	(\cos x)' = -\sin x \hspace{5ex} 
+	(\tg x)' = \dfrac{1}{\cos^2 x} \hspace{5ex} \\
+	(\ctg x)' = -\dfrac{1}{\sin^2 x} \hspace{5ex}
+	(e^x)' = e^x \hspace{5ex} 
+	(a^x)' = a^x \ln a \hspace{5ex} 
+	(\ln |x|)' = \dfrac{1}{x} \hspace{5ex} 
+	(\log_a |x|)' = \dfrac{1} {x \ln a} \hspace{5ex}\\
+	(\arcsin x)' = \dfrac{1}{\sqrt{1 - x^2}} \hspace{5ex}
+	(\arccos x)' = -\dfrac{1}{\sqrt{1 - x^2}} \hspace{5ex}
+	(\arctg x)' = \dfrac{1}{1 + x^2} \hspace{5ex}\\
+	(\arcctg x)' = -\dfrac{1}{1 + x^2} \hspace{5ex}
+	(\sh x)' = \ch x \hspace{5ex} 
+	(\ch x)' = \sh x \hspace{5ex} 
+	(\th x)' = \dfrac{1}{\ch^2 x} \hspace{5ex} \\
+	(\cth x)' = -\dfrac{1}{\sh^2 x} \hspace{5ex}	\\
+$
+\end{formula}
+
+\begin{formula}
+$
+	(af(x) + bg(x))' = af'(x) + bg'(x) \hspace{5ex}
+	(f(x)g(x))' = f'(x)g(x) + f(x)g'(x)\\
+	\left ( \dfrac{f(x)}{g(x)} \right ) ' = \dfrac{f'(x)g(x) - f(x)g'(x)}{g^2(x)} \hspace{5ex}
+	(f(g(x)))' = f'(g(x))g'(x)\\
+	(u(x)v(x))^{(n)} = \sum \limits_{k = 0}^n {n \choose k}u^{(k)}(x)v^{(n - k)}(x )
+$
+\end{formula}
+
+\newpage
+\begin{center}
+  {\Large\bf 
+   Интегралы}\\
+\end{center}
+
+\vspace{-1em}
+\LINE
+\vspace{1em}
+\pagestyle{fancy}
+\begin{formula}
+$
+\int x^n dx = \dfrac{x^{n + 1}}{n + 1} + C \hspace{5ex} \\
+\int \dfrac{dx}{x} = \ln |x| + C \\
+\\
+\int \dfrac{dx}{x^2 + a^2} = \dfrac{1}{a} \arctg \dfrac{x}{a} + C \hspace{5ex}\\
+\int \dfrac{dx}{x^2 - a^2} = \dfrac{1}{2a} \ln \left | \dfrac{x - a}{x + a} \right |+ C \hspace{5ex}\\
+\int \dfrac{dx}{\sqrt{a^2 - x^2}} = \arcsin \dfrac{x}{a} + C\\
+\int \dfrac{dx}{\sqrt{x^2 - a^2}} = \ln |x + \sqrt{x^2 - a^2}| + C\\
+\int \dfrac{dx}{\sqrt{x^2 + a}} = \ln |x + \sqrt{x^2 + a}| + C\\
+\\
+\int \sin x dx = -\cos x + C \hspace{5ex} \\
+\int \cos x dx = \sin x + C \hspace{5ex} \\
+\int \dfrac{dx}{\sin^2 x} = -ctg x + C \\
+\int \dfrac{dx}{\cos^2 x} = tg x + C \hspace{5ex} \\
+\int \dfrac{dx}{\sin x} = \ln |\tg \dfrac{x}{2}| + C \hspace{5ex} \\
+\int \dfrac{dx}{\cos x} = -\ln |\tg (\dfrac{x}{2} - \dfrac{\pi}{4})| + C \\
+ \int \tg x dx = -\ln |\cos x| + C \hspace{5ex} \\
+ \int \ctg x dx = \ln |\sin x| + C\\
+ \\
+ \int e^x dx = e^x + C \hspace{5ex} \\
+ \int a^x dx = \dfrac{a^x}{\ln a} + C \hspace{5ex} \\
+ \int \sh x dx = \ch x + C \hspace{5ex}\\
+\int \ch x dx = \sh x + C \\
+\int \ln x dx = x\ln x - x + C \\
+\\
+\int \sqrt{x^2 - a^2}dx = \frac{x}{2}\sqrt{x^2 - a^2} + \frac{a^2}{4}\ln|\frac{\sqrt{x^2 - a^2} - x}{\sqrt{x^2 - a^2} + x}| + C\\
+\int \sqrt{a^2 - x^2}dx = \frac{x}{2}\sqrt{a^2 - x^2} + \frac{a^2}{2}\arctg{\frac{x}{\sqrt{a^2 - x^2}}} + C\\
+\int \sqrt{x^2 + a^2}dx = \frac{a^2}{2}\ln{|x + \sqrt{x^2 + a^2}|} + \frac{x}{2}\sqrt{x^2 + a^2} + C\\
+\\
+%d(f(x)) = f'(x)dx\\
+%\int f(g(x))g'(x)dx = F(g(x)) + C = \int f(g(x))d(g(x)) = \int f(t)dt = F(t) + C = F(g(t)) + C\\
+%\int f(x)g'(x)dx = f(x)g(x) - \int g(x)f'(x)dx = \int f(x)d(g(x)) = f(x)g(x) - \int g(x)d(f(x))\\
+ $
+\end{formula}
+\end{document}
