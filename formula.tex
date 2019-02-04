@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[russian]{babel}
 \usepackage{graphicx}
+\usepackage{amsmath}
 \usepackage{amsthm,amsmath,amssymb}
 \usepackage[russian,colorlinks=true,urlcolor=red,linkcolor=blue]{hyperref}
 \usepackage{enumerate}
@@ -15,11 +16,6 @@
 \usepackage{color}
 \usepackage{verbatim}
 \usepackage{tikz}
-\usepackage{epstopdf}
-
-\def\NAME{Динамика}
-\def\DATE{15 ноября}
-\def\CURNO{\NO\t{9}}
 
 \parskip=0em
 \parindent=0em
@@ -200,6 +196,102 @@ $
 \tg x = \dfrac{1 - \tg^2 \frac{x}{2}}{2\tg \frac{x}{2}} \\
 \\
 $
+\end{formula}
+
+\newpage
+
+\begin{center}
+  {\Large\bf 
+   arc функции}\\
+\end{center}
+
+\vspace{-1em}
+\LINE
+\vspace{1em}
+\pagestyle{fancy}
+\begin{formula}
+$
+\arcsin(-m) = -\arcsin m \hspace{8ex} \arcsin m \in \left[-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right]\\
+\arccos(-m) = \pi - \arccos m \hspace{5ex} \arccos m \in [0, \pi]\\
+\arctg(-m) = - \arctg m \hspace{9ex} \arctg m \in \left(-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right)\\
+\arcctg(-m) = \pi - \arcctg m \hspace{5ex} \arcctg m \in (0, \pi)\\
+\\
+\arcsin x + \arccos x = \dfrac{\pi}{2}\\
+\arctg x + \arcctg x = \dfrac{\pi}{2}\\
+\\
+\arcsin x =
+    \left\{ 
+      \begin{gathered} 
+        \arccos\sqrt{1 - x^2}, x\in[0,1] \hfill \\ 
+        -\arccos\sqrt{1 - x^2}, x \in [-1,0]\hfill \\
+      \end{gathered} 
+    \right.
+    \\
+\arccos x =
+    \left\{ 
+      \begin{gathered} 
+        \arcsin\sqrt{1 - x^2}, x\in[0,1] \hfill \\ 
+        -\arcsin\sqrt{1 - x^2}, x \in [-1,0]\hfill \\
+      \end{gathered} 
+    \right.\\
+\arcsin x =
+    \left\{ 
+      \begin{gathered} 
+        \arcctg\dfrac{\sqrt{1 - x^2}}{x}, x\in(0,1] \hfill \\ 
+        \arcctg\dfrac{\sqrt{1 - x^2}}{x} - \pi, x \in [-1,0)\hfill \\
+      \end{gathered} 
+    \right.
+    \\
+\arccos x =
+    \left\{ 
+      \begin{gathered} 
+        \arctg\dfrac{\sqrt{1 - x^2}}{x}, x\in(0,1] \hfill \\ 
+        \pi + \arctg\dfrac{\sqrt{1 - x^2}}{x}, x \in [-1,0)\hfill \\
+      \end{gathered} 
+    \right.\\
+\arctg x =
+    \left\{ 
+      \begin{gathered} 
+        \arccos\dfrac{1}{\sqrt{1 + x^2}}, x \ge 0 \hfill \\ 
+        -\arccos\dfrac{1}{\sqrt{1 + x^2}}, x \le 0\hfill \\
+      \end{gathered} 
+    \right.\\
+\arcctg x =
+    \left\{ 
+      \begin{gathered} 
+        \arcsin\dfrac{1}{\sqrt{1 + x^2}}, x \ge 0 \hfill \\ 
+        \pi-\arcsin\dfrac{1}{\sqrt{1 + x^2}}, x \le 0\hfill \\
+      \end{gathered} 
+    \right.\\
+\arctg x =
+    \left\{ 
+      \begin{gathered} 
+        \arcctg\dfrac{1}{x}, x > 0 \hfill \\ 
+        \arcctg\dfrac{1}{x} - \pi, x < 0\hfill \\
+      \end{gathered} 
+    \right.\\
+    \\
+\sin(\arcsin x) = x, x\in[-1,1]\\
+\sin(\arccos x) = \sqrt{1 - x^2}, x \in [-1,1]\\
+\sin(\arctg x) = \dfrac{x}{\sqrt{1 + x^2}}, x\in(-\infty,\infty)\\
+\sin(\arcctg x) = \dfrac{1}{\sqrt{1 + x^2}}, x\in(-\infty,\infty)\\
+\\
+\cos(\arccos x) = x, x\in[-1,1]\\
+\cos(\arcsin x) = \sqrt{1 - x^2}, x \in [-1,1]\\
+\cos(\arctg x) = \dfrac{1}{\sqrt{1 + x^2}}, x\in(-\infty,\infty)\\
+\cos(\arcctg x) = \dfrac{x}{\sqrt{1 + x^2}}, x\in(-\infty,\infty)\\
+\\
+\tg(\arctg x) = x, x\in(-\infty,\infty)\\
+\tg(\arcctg x) = \dfrac{1}{x}, x \ne 0\\
+\tg(\arcsin x) = \dfrac{x}{\sqrt{1 - x^2}}, x\in(-1,1)\\
+\tg(\arccos x) = \dfrac{\sqrt{1 - x^2}}{x}, x\in(-1,1), x \ne 0\\
+\\
+\ctg(\arcctg x) = x, x\in(-\infty,\infty)\\
+\ctg(\arctg x) = \dfrac{1}{x}, x \ne 0\\
+\ctg(\arcsin x) = \dfrac{\sqrt{1 - x^2}}{x}, x\in(-1,1), x \ne 0\\
+\ctg(\arccos x) = \dfrac{x}{\sqrt{1 - x^2}}, x\in(-1,1)\\
+$
+
 \end{formula}
 
 \newpage
